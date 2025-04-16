@@ -13,7 +13,10 @@ export default function Onboarding() {
         Welcome to SepsisCheck Parallel
       </motion.h2>
 
-      <motion.p className="text-xl text-muted-foreground">
+      <motion.p
+        variants={BLUR_ENTRY_CHILD_VARIANTS}
+        className="text-xl text-muted-foreground"
+      >
         Implementation of the Phoenix Sepsis Criteria for data science
         applications
       </motion.p>
