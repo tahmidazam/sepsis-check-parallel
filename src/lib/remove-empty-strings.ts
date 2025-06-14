@@ -1,7 +1,7 @@
-export function removeEmptyStrings<T extends Record<string, any>>(
+export function removeEmptyStrings<T extends Record<string, unknown>>(
   obj: T
 ): Partial<T> {
   return Object.fromEntries(
-    Object.entries(obj).filter(([_, value]) => value !== "")
+    Object.entries(obj).filter(([, value]) => value !== "")
   ) as Partial<T>;
 }

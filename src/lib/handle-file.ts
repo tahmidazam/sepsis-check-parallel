@@ -3,7 +3,7 @@ import {
   phoenixSepsisCriteriaResultSchema,
 } from "@/lib/score-schema";
 import Papa from "papaparse";
-import z, { map } from "zod";
+import z from "zod";
 import { removeEmptyStrings } from "./remove-empty-strings";
 
 export function handleCSVFile(file: File): Promise<{
