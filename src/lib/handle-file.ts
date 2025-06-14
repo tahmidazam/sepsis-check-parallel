@@ -3,7 +3,8 @@ import {
   phoenixSepsisCriteriaResultSchema,
 } from "@/lib/score-schema";
 import Papa from "papaparse";
-import z from "zod";
+import z, { map } from "zod";
+import { removeEmptyStrings } from "./remove-empty-strings";
 
 export function handleCSVFile(file: File): Promise<{
   results: PhoenixSepsisCriteriaResult[];
@@ -12,9 +13,11 @@ export function handleCSVFile(file: File): Promise<{
   return new Promise((resolve, reject) => {
     const handleComplete = (results: Papa.ParseResult<unknown>) => {
       try {
-        const parseResult = z
-          .array(phoenixSepsisCriteriaResultSchema)
-          .parse(results.data);
+        const parseResult = z.array(phoenixSepsisCriteriaResultSchema).parse(
+          results.data.map((row) => {
+            return removeEmptyStrings(row as Record<string, unknown>);
+          })
+        );
 
         if (results.errors.length > 0) reject(results.errors);
 
