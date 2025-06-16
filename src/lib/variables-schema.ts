@@ -6,7 +6,7 @@ import { plateletConcentrationUnitSchema } from "@/lib/platelet-concentration";
 import { pupilStateSchema } from "@/lib/pupil-state";
 import { respiratorySupportSchema } from "@/lib/respiratory-support";
 import { isFuture, isValid, parse } from "date-fns";
-import z, { string } from "zod";
+import z from "zod";
 
 export const variablesSchema = z.object({
   dateOfBirth: z
