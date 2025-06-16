@@ -6,7 +6,7 @@ import { plateletConcentrationUnitSchema } from "@/lib/platelet-concentration";
 import { pupilStateSchema } from "@/lib/pupil-state";
 import { respiratorySupportSchema } from "@/lib/respiratory-support";
 import { isFuture, isValid, parse } from "date-fns";
-import z from "zod";
+import z, { string } from "zod";
 
 export const variablesSchema = z.object({
   dateOfBirth: z
@@ -16,6 +16,16 @@ export const variablesSchema = z.object({
       if (!isValid(parsed)) throw new Error("Invalid date format");
       if (isFuture(parsed))
         throw new Error("Date of birth cannot be in the future");
+      return parsed;
+    })
+    .optional(),
+  timestampOfAssessment: z
+    .string()
+    .transform((string) => {
+      const parsed = parse(string, "dd/MM/yyyy HH:mm", new Date());
+      if (!isValid(parsed)) throw new Error("Invalid date format");
+      if (isFuture(parsed))
+        throw new Error("Time of assessment cannot be in the future");
       return parsed;
     })
     .optional(),

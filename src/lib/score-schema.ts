@@ -18,6 +18,7 @@ export const phoenixSepsisCriteriaResultSchema = variablesSchema.transform(
   (variables) => {
     const {
       dateOfBirth,
+      timestampOfAssessment,
       saturationOfPeripheralOxygen,
       fractionOfInspiredOxygen,
       respiratorySupport,
@@ -60,7 +61,8 @@ export const phoenixSepsisCriteriaResultSchema = variablesSchema.transform(
       scoreMeanArterialPressureSubcomponent(
         meanArterialPressure,
         meanArterialPressureUnit,
-        dateOfBirth
+        dateOfBirth,
+        timestampOfAssessment
       );
 
     const ageBand = meanArterialPressureSubcomponent?.ageBand;

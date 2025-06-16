@@ -7,7 +7,8 @@ import {
 export function scoreMeanArterialPressureSubcomponent(
   meanArterialPressure: number | undefined,
   meanArterialPressureUnit: MeanArterialPressureUnit | undefined,
-  dateOfBirth: Date | undefined
+  dateOfBirth: Date | undefined,
+  timestampOfAssessment: Date | undefined
 ):
   | {
       ageBand: AgeBand;
@@ -17,11 +18,12 @@ export function scoreMeanArterialPressureSubcomponent(
   if (
     meanArterialPressure === undefined ||
     meanArterialPressureUnit === undefined ||
-    dateOfBirth === undefined
+    dateOfBirth === undefined ||
+    timestampOfAssessment === undefined
   )
     return undefined;
 
-  const ageInMs = Date.now() - dateOfBirth.getTime();
+  const ageInMs = timestampOfAssessment.getTime() - dateOfBirth.getTime();
   const meanArterialPressureInBaseUnit = convertMeanArterialPressureToBaseUnit(
     meanArterialPressure,
     meanArterialPressureUnit
